@@ -2,9 +2,9 @@
 using ExileCore.Shared.Nodes;
 using SharpDX;
 
-namespace ExileRitualEj;
+namespace CountingExiles;
 
-public class ExileRitualEjSettings : ISettings
+public class CountingExilesSettings : ISettings
 {
     public ToggleNode Enable { get; set; } = new ToggleNode(false);
     

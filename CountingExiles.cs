@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Vector2 = System.Numerics.Vector2;
 
-namespace ExileRitualEj;
+namespace CountingExiles;
 
 public class RitualBlockerInfo
 {
@@ -31,7 +31,7 @@ public struct EntityStatsInfo
     public int ActorScalePct { get; set; }
 }
 
-public class ExileRitualEj : BaseSettingsPlugin<ExileRitualEjSettings>
+public class CountingExiles : BaseSettingsPlugin<CountingExilesSettings>
 {
     #region Constants
     // Configuration constants for gigantic entity detection via mods and stats,
@@ -58,7 +58,7 @@ public class ExileRitualEj : BaseSettingsPlugin<ExileRitualEjSettings>
     private readonly List<RitualBlockerInfo> _ritualBlockers = new List<RitualBlockerInfo>();
     private readonly HashSet<Vector2> _insideRitualSpawnPositions = new HashSet<Vector2>();
     
-    private ExileRitualEjRenderer _renderer;
+    private CountingExilesRenderer _renderer;
     
     #endregion
 
@@ -67,7 +67,7 @@ public class ExileRitualEj : BaseSettingsPlugin<ExileRitualEjSettings>
     
     public override bool Initialise()
     {
-        _renderer = new ExileRitualEjRenderer(this, Settings, GameController, Graphics);
+        _renderer = new CountingExilesRenderer(this, Settings, GameController, Graphics);
         return true;
     }
 
@@ -357,14 +357,14 @@ public class ExileRitualEj : BaseSettingsPlugin<ExileRitualEjSettings>
     }
 
     private int CountNearbyGigantismEntities()
-    {
-        var playerPos = GameController.Player.GridPosNum;
-        const float NEAR_RADIUS = 100f;      // ปรับระยะ “ใกล้” ได้ตามต้องการ
+{
+    var playerPos = GameController.Player.GridPosNum;
+    const float NEAR_RADIUS = 100f;      // ปรับระยะ “ใกล้” ได้ตามต้องการ
 
-        return _gigantEntities.Count(e =>
-            !e.IsDead &&
-            Vector2.Distance(e.GridPosNum, playerPos) <= NEAR_RADIUS);
-    }
+    return _gigantEntities.Count(e =>
+        !e.IsDead &&
+        Vector2.Distance(e.GridPosNum, playerPos) <= NEAR_RADIUS);
+}
 
     #endregion
 }

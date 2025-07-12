@@ -7,16 +7,16 @@ using System.Collections.Generic;
 using System.Linq;
 using Vector2 = System.Numerics.Vector2;
 
-namespace ExileRitualEj;
+namespace CountingExiles;
 
-public class ExileRitualEjRenderer
+public class CountingExilesRenderer
 {
     private readonly BaseSettingsPlugin<ExileRitualEjSettings> _plugin;
     private readonly ExileRitualEjSettings _settings;
     private readonly GameController _gameController;
     private readonly Graphics _graphics;
 
-    public ExileRitualEjRenderer(BaseSettingsPlugin<ExileRitualEjSettings> plugin, ExileRitualEjSettings settings, GameController gameController, Graphics graphics)
+    public CountingExilesRenderer(BaseSettingsPlugin<ExileRitualEjSettings> plugin, ExileRitualEjSettings settings, GameController gameController, Graphics graphics)
     {
         _plugin = plugin;
         _settings = settings;
@@ -127,7 +127,7 @@ public class ExileRitualEjRenderer
         
         _graphics.DrawText(countText, textPos, Color.Yellow);
     }
-    
+
     public void DrawNearbyGiganticCount(int count)
     {
         if (!_settings.RenderGiganticName.Value || count <= 0) return;
