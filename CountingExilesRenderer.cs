@@ -11,12 +11,12 @@ namespace CountingExiles;
 
 public class CountingExilesRenderer
 {
-    private readonly BaseSettingsPlugin<ExileRitualEjSettings> _plugin;
-    private readonly ExileRitualEjSettings _settings;
+    private readonly BaseSettingsPlugin<CountingExilesSettings> _plugin;
+    private readonly CountingExilesSettings _settings;
     private readonly GameController _gameController;
     private readonly Graphics _graphics;
 
-    public CountingExilesRenderer(BaseSettingsPlugin<ExileRitualEjSettings> plugin, ExileRitualEjSettings settings, GameController gameController, Graphics graphics)
+    public CountingExilesRenderer(BaseSettingsPlugin<CountingExilesSettings> plugin, CountingExilesSettings settings, GameController gameController, Graphics graphics)
     {
         _plugin = plugin;
         _settings = settings;
