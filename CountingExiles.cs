@@ -169,9 +169,6 @@ public class CountingExiles : BaseSettingsPlugin<CountingExilesSettings>
         _renderer.RenderRitualRadius(_ritualRuneEntities);
         _renderer.RenderInsideRitualSpawnPositions(_insideRitualSpawnPositions);
         _renderer.DrawRitualBlockerCounts(_ritualBlockers);
-
-        int nearby = CountNearbyGigantismEntities();   // ← ฟังก์ชันข้อ 3
-        _renderer.DrawNearbyGiganticCount(nearby);
     }
 
     #endregion
@@ -355,16 +352,6 @@ public class CountingExiles : BaseSettingsPlugin<CountingExilesSettings>
         
         return combinedLifePct >= MIN_COMBINED_LIFE_PCT && actorScalePct >= MIN_ACTOR_SCALE_PCT;
     }
-
-    private int CountNearbyGigantismEntities()
-{
-    var playerPos = GameController.Player.GridPosNum;
-    const float NEAR_RADIUS = 100f;      // ปรับระยะ “ใกล้” ได้ตามต้องการ
-
-    return _gigantEntities.Count(e =>
-        !e.IsDead &&
-        Vector2.Distance(e.GridPosNum, playerPos) <= NEAR_RADIUS);
-}
 
     #endregion
 }

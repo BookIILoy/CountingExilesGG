@@ -112,6 +112,7 @@ public class CountingExilesRenderer
     private void DrawCountText(System.Numerics.Vector2 screenPos, string countText)
     {
         var textPos = new Vector2(screenPos.X - 10, screenPos.Y - 10);
+        var text = $"Nearby Ggantic Exiles in Ritual:";
         
         // Draw shadow
         for (int x = -2; x <= 2; x++)
@@ -125,45 +126,8 @@ public class CountingExilesRenderer
             }
         }
         
-        _graphics.DrawText(countText, textPos, Color.Yellow);
+        _graphics.DrawText(text,countText, textPos, Color.Yellow);
     }
-
-    public void DrawNearbyGiganticCount(int count)
-    {
-        if (!_settings.RenderGiganticName.Value || count <= 0) return;
-
-        var text = $"Nearby Gigantic Exiles: {count}";
-        var fontSize = 18;
-        var padding = new Vector2(10, 6);
-        var textSize = _graphics.MeasureText(text, fontSize);
-
-        var screenPos = new Vector2(50, 50); // มุมซ้ายบน
-        var boxTopLeft = screenPos - padding;
-        var boxBottomRight = screenPos + new Vector2(textSize.X, textSize.Y) + padding;
-
-        // วาดพื้นหลังโปร่งใสสีเทา
-        var backgroundColor = new SharpDX.Color(50, 50, 50, 180); // เทาโปร่งใส
-        _graphics.DrawBox(boxTopLeft, boxBottomRight, backgroundColor);
-
-        // วาดกรอบดำรอบกล่อง
-        _graphics.DrawFrame(boxTopLeft, boxBottomRight, SharpDX.Color.Black, thickness: 2);
-
-        // วาดเงาตัวอักษร
-        for (int x = -1; x <= 1; x++)
-        {
-            for (int y = -1; y <= 1; y++)
-            {
-                if (x != 0 || y != 0)
-                {
-                    _graphics.DrawText(text, screenPos + new Vector2(x, y), SharpDX.Color.Black, fontSize);
-                }
-            }
-        }
-
-        // วาดข้อความหลัก (สีน้ำเงิน)
-        _graphics.DrawText(text, screenPos, SharpDX.Color.CornflowerBlue, fontSize);
-    }
-
 
     private void DrawFilledCircleOnMap(Vector2 gridPosition, float radius, SharpDX.Color color)
     {
