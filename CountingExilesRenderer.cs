@@ -116,35 +116,58 @@ public class CountingExilesRenderer
         var titleText = "Nearby Gigantic Exiles in Ritual:";
         var countValueText = countText;
 
-        // Draw shadow for title
+        // คำนวณขนาดข้อความทั้งหมด (title + count)
+        var titleSize = _graphics.MeasureText(titleText, 20);   // สมมติ fontSize=20
+        var countSize = _graphics.MeasureText(countValueText, 20);
+
+        float paddingX = 10;
+        float paddingY = 6;
+
+        // รวมขนาดกล่องครอบข้อความทั้งสองบรรทัด (แถว count อยู่ต่ำกว่าประมาณ 20 px)
+        var boxWidth = Math.Max(titleSize.X, countSize.X) + paddingX * 2;
+        var boxHeight = titleSize.Y + countSize.Y + paddingY * 3;
+
+        var boxTopLeft = basePos - new Vector2(paddingX, paddingY);
+        var boxBottomRight = boxTopLeft + new Vector2(boxWidth, boxHeight);
+
+        // วาดกล่องพื้นหลังสีเขียวโปร่งแสง 50%
+        var backgroundColor = new SharpDX.Color(0, 128, 0, 128); // RGBA (0,128,0) สีเขียวครึ่งโปร่งแสง
+        _graphics.DrawBox(boxTopLeft, boxBottomRight, backgroundColor);
+
+        // วาดกรอบกล่อง (optional)
+        _graphics.DrawFrame(boxTopLeft, boxBottomRight, SharpDX.Color.Black, thickness: 2);
+
+        // วาดเงาข้อความ title
         for (int x = -2; x <= 2; x++)
         {
             for (int y = -2; y <= 2; y++)
             {
                 if (x != 0 || y != 0)
                 {
-                    _graphics.DrawText(titleText, basePos + new Vector2(x, y), Color.Black);
+                    _graphics.DrawText(titleText, basePos + new Vector2(x, y), Color.Black, 20);
                 }
             }
         }
 
-    _graphics.DrawText(titleText, basePos, Color.LightBlue);
+        // วาดข้อความ title สีฟ้าอ่อน
+        _graphics.DrawText(titleText, basePos, Color.LightBlue, 20);
 
-    // Draw shadow for count value (just below title)
-    var countPos = basePos + new Vector2(0, 20); // Shift downward
-    for (int x = -2; x <= 2; x++)
-    {
-        for (int y = -2; y <= 2; y++)
+        // วาดเงาข้อความ count
+        var countPos = basePos + new Vector2(0, titleSize.Y + paddingY);
+        for (int x = -2; x <= 2; x++)
         {
-            if (x != 0 || y != 0)
+            for (int y = -2; y <= 2; y++)
             {
-                _graphics.DrawText(countValueText, countPos + new Vector2(x, y), Color.Black);
+                if (x != 0 || y != 0)
+                {
+                    _graphics.DrawText(countValueText, countPos + new Vector2(x, y), Color.Black, 20);
+                }
             }
         }
-    }
 
-    _graphics.DrawText(countValueText, countPos, Color.Yellow);
-}
+        // วาดข้อความ count สีเหลือง
+        _graphics.DrawText(countValueText, countPos, Color.Yellow, 20);
+    }
 
     private void DrawFilledCircleOnMap(Vector2 gridPosition, float radius, SharpDX.Color color)
     {
