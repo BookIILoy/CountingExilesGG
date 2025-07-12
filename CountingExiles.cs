@@ -144,17 +144,17 @@ public class CountingExiles : BaseSettingsPlugin<CountingExilesSettings>
         if (blockerUpdated)
         {
             _insideRitualSpawnPositions.Add(entity.GridPosNum);
-            LogMessage($"Inside RITUAL spawn position registered: {entity.GridPosNum} (blocker count updated)");
+            // LogMessage($"Inside RITUAL spawn position registered: {entity.GridPosNum} (blocker count updated)");
         }
         
-        LogMessage($"GIGANTIC spawn position saved: {entity.GridPosNum}, Distance: {entity.DistancePlayer}, " +
-                  $"CombinedLifePct: {stats.CombinedLifePct}, ActorScalePct: {stats.ActorScalePct}");
+        // LogMessage($"GIGANTIC spawn position saved: {entity.GridPosNum}, Distance: {entity.DistancePlayer}, " +
+        //           $"CombinedLifePct: {stats.CombinedLifePct}, ActorScalePct: {stats.ActorScalePct}");
     }
 
     private void LogGigantSkipped(Entity entity, EntityStatsInfo stats)
     {
-        LogMessage($"GIGANTIC entity skipped (conditions not met): ID={entity.Id}, " +
-                  $"CombinedLifePct: {stats.CombinedLifePct}, ActorScalePct: {stats.ActorScalePct}");
+        // LogMessage($"GIGANTIC entity skipped (conditions not met): ID={entity.Id}, " +
+        //           $"CombinedLifePct: {stats.CombinedLifePct}, ActorScalePct: {stats.ActorScalePct}");
     }
 
     #endregion
@@ -231,8 +231,8 @@ public class CountingExiles : BaseSettingsPlugin<CountingExilesSettings>
         var blockerInfo = CreateRitualBlockerInfo(entity);
         _ritualBlockers.Add(blockerInfo);
         
-        LogMessage($"RitualBlocker entity added: ID={entity.Id}, Position={entity.GridPosNum}, " +
-                  $"InitialCount={blockerInfo.Count} (total previous was {-blockerInfo.Count})");
+        // LogMessage($"RitualBlocker entity added: ID={entity.Id}, Position={entity.GridPosNum}, " +
+        //           $"InitialCount={blockerInfo.Count} (total previous was {-blockerInfo.Count})");
     }
 
     // The function prevents processing a new fog at the position of the previous fog (in case that ever happens)
@@ -243,7 +243,7 @@ public class CountingExiles : BaseSettingsPlugin<CountingExilesSettings>
             var distance = Vector2.Distance(existingBlocker.Position, position);
             if (distance < MIN_BLOCKER_DISTANCE)
             {
-                LogMessage($"RitualBlocker ignored (too close): Distance={distance:F1} to existing blocker at {existingBlocker.Position}");
+                // LogMessage($"RitualBlocker ignored (too close): Distance={distance:F1} to existing blocker at {existingBlocker.Position}");
                 return true;
             }
         }
@@ -279,7 +279,7 @@ public class CountingExiles : BaseSettingsPlugin<CountingExilesSettings>
         }
         catch (System.Exception ex)
         {
-            LogError($"Error processing entity in EntityAdded: {ex.Message}");
+            // LogError($"Error processing entity in EntityAdded: {ex.Message}");
         }
     }
 
@@ -295,14 +295,14 @@ public class CountingExiles : BaseSettingsPlugin<CountingExilesSettings>
         if (IsGiganticEntity(entity))
         {
             _gigantEntities.Add(entity);
-            LogMessage($"GIGANTIC entity added: ID={entity.Id}, Distance={entity.DistancePlayer}, " +
-                      $"IsDead={entity.IsDead}, CombinedLifePct: {entityStats.CombinedLifePct}, " +
-                      $"ActorScalePct: {entityStats.ActorScalePct}");
+            // LogMessage($"GIGANTIC entity added: ID={entity.Id}, Distance={entity.DistancePlayer}, " +
+            //           $"IsDead={entity.IsDead}, CombinedLifePct: {entityStats.CombinedLifePct}, " +
+            //           $"ActorScalePct: {entityStats.ActorScalePct}");
         }
         else
         {
-            LogMessage($"GIGANTIC entity skipped (conditions not met): ID={entity.Id}, " +
-                      $"CombinedLifePct: {entityStats.CombinedLifePct}, ActorScalePct: {entityStats.ActorScalePct}");
+            // LogMessage($"GIGANTIC entity skipped (conditions not met): ID={entity.Id}, " +
+            //           $"CombinedLifePct: {entityStats.CombinedLifePct}, ActorScalePct: {entityStats.ActorScalePct}");
         }
     }
 
@@ -322,7 +322,7 @@ public class CountingExiles : BaseSettingsPlugin<CountingExilesSettings>
             {
                 blocker.Count++;
                 blockerUpdated = true;
-                LogMessage($"RitualBlocker count updated: Position={blocker.Position}, NewCount={blocker.Count}, Distance={distance:F1}");
+                // LogMessage($"RitualBlocker count updated: Position={blocker.Position}, NewCount={blocker.Count}, Distance={distance:F1}");
             }
         }
         return blockerUpdated;
