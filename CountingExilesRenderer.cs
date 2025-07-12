@@ -111,23 +111,40 @@ public class CountingExilesRenderer
 
     private void DrawCountText(System.Numerics.Vector2 screenPos, string countText)
     {
-        var textPos = new Vector2(screenPos.X - 10, screenPos.Y - 10);
-        var text = $"Nearby Ggantic Exiles in Ritual:";
-        
-        // Draw shadow
+        var basePos = new Vector2(screenPos.X - 10, screenPos.Y - 10);
+
+        var titleText = "Nearby Gigantic Exiles in Ritual:";
+        var countValueText = countText;
+
+        // Draw shadow for title
         for (int x = -2; x <= 2; x++)
         {
             for (int y = -2; y <= 2; y++)
             {
                 if (x != 0 || y != 0)
                 {
-                    _graphics.DrawText(countText, new Vector2(textPos.X + x, textPos.Y + y), Color.Black);
+                    _graphics.DrawText(titleText, basePos + new Vector2(x, y), Color.Black);
                 }
             }
         }
-        
-        _graphics.DrawText(text,countText, textPos, Color.Yellow);
+
+    _graphics.DrawText(titleText, basePos, Color.LightBlue);
+
+    // Draw shadow for count value (just below title)
+    var countPos = basePos + new Vector2(0, 20); // Shift downward
+    for (int x = -2; x <= 2; x++)
+    {
+        for (int y = -2; y <= 2; y++)
+        {
+            if (x != 0 || y != 0)
+            {
+                _graphics.DrawText(countValueText, countPos + new Vector2(x, y), Color.Black);
+            }
+        }
     }
+
+    _graphics.DrawText(countValueText, countPos, Color.Yellow);
+}
 
     private void DrawFilledCircleOnMap(Vector2 gridPosition, float radius, SharpDX.Color color)
     {
